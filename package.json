@@ -2,9 +2,10 @@
   "name": "code-katas",
   "version": "1.0.0",
   "description": "A repository for solutions to code challenges from Code Wars",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run": "ts-node src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"  
   },
   "author": "p-stanescu",
   "license": "ISC"
