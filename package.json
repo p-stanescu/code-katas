@@ -1,7 +1,7 @@
 {
   "name": "code-katas",
   "version": "1.0.0",
-  "description": "A repository for solutions to code challenges from Code Wars",
+  "description": "A repository for challenges from Code Wars",
   "main": "index.ts",
   "scripts": {
     "run": "ts-node katas/index.ts",
