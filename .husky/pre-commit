@@ -12,43 +12,43 @@ if [ "$SKIP_HOOKS" = "true" ]; then
   exit 0
 fi
 
-# Helper function to prompt user
-prompt_continue() {
-  echo "⚠️  Do you want to continue anyway? [y/N]"
-  read answer
-  case "$answer" in
-    [Yy]* ) echo "➡️  Continuing to next step...";;
-    * ) echo "🛑 Commit aborted."; exit 1;;
-  esac
-}
-
 echo "🛡️  Starting pre-commit checks..."
 
 # Step 1: Linting
 echo "🧹 Step 1: Linting..."
-if pnpm lint; then
-  echo "✅ Lint passed!"
-else
+pnpm lint || exit_code=$?
+if [ "$exit_code" ]; then
   echo "❌ Lint failed."
-  prompt_continue
+  exit 1
 fi
+echo "✅ Lint passed!"
 
-# Step 2: Format check
-echo "🎨 Step 2: Format check..."
-if pnpm format:check; then
-  echo "✅ Format check passed!"
-else
+# Step 2: Type Checking
+echo "📐 Step 2: Type checking..."
+pnpm typecheck || exit_code=$?
+if [ "$exit_code" ]; then
+  echo "❌ Type check failed."
+  exit 1
+fi
+echo "✅ Type check passed!"
+
+# Step 3: Format Check
+echo "🎨 Step 3: Format check..."
+pnpm format:check || exit_code=$?
+if [ "$exit_code" ]; then
   echo "❌ Format check failed."
-  prompt_continue
+  exit 1
 fi
+echo "✅ Format check passed!"
 
-# Step 3: Testing
-echo "🧪 Step 3: Running tests..."
-if pnpm test; then
-  echo "✅ All tests passed!"
-else
+# Step 4: Tests
+echo "🧪 Step 4: Running tests..."
+pnpm test || exit_code=$?
+if [ "$exit_code" ]; then
   echo "❌ Tests failed."
-  prompt_continue
+  exit 1
 fi
+echo "✅ All tests passed!"
 
-echo "🎉 All pre-commit checks completed — proceeding with commit!"
+echo "🎉 All checks completed — commit ready!"
+exit 0
