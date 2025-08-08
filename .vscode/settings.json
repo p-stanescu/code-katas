@@ -10,7 +10,9 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "eslint.format.enable": false, // Let Prettier handle formatting, not ESLint
+
+  // Format using Prettier, not ESlint
+  "eslint.format.enable": false,
 
   // File handling settings
   "files.trimTrailingWhitespace": true,

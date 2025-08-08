@@ -24,26 +24,29 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "format:debug": "prettier . --write --debug-check",
-    "format:list-different": "prettier . --list-different"
+    "format:list-different": "prettier . --list-different",
+    "safe-install": "bash ./util-scripts/safe-install.sh"
   },
   "author": "p-stanescu",
   "license": "ISC",
   "devDependencies": {
-    "tsx": "4.20.3",
-    "typescript": "5.4.5",
+    "@socketsecurity/cli": "1.0.87",
     "@typescript-eslint/eslint-plugin": "8.39.0",
     "@typescript-eslint/parser": "8.39.0",
-    "vitest": "3.2.4",
     "@vitest/coverage-v8": "3.2.4",
     "@vitest/ui": "3.2.4",
     "eslint": "9.32.0",
     "eslint-config-prettier": "10.1.8",
-    "prettier": "3.6.2",
+    "husky": "^8.0.0",
     "only-allow": "1.2.1",
-    "husky": "^8.0.0"
+    "prettier": "3.6.2",
+    "tsx": "4.20.3",
+    "typescript": "5.4.5",
+    "vitest": "3.2.4"
   },
   "dependencies": {
     "dotenv": "17.2.1",
+    "safe-install": "1.0.12",
     "zod": "4.0.15"
   }
 }

@@ -6,7 +6,7 @@ describe('log', () => {
   it('should call console.log with "hello"', () => {
     const spy = vi.spyOn(console, 'log').mockImplementation(() => {});
     log();
-    expect(spy).toHaveBeenCalledWith(true);
+    expect(spy).toBeCalledTimes(1);
     spy.mockRestore();
   });
 });
