@@ -9,3 +9,6 @@ coverage/
 
 # TypeScript cache
 *.tsbuildinfo
+
+# Environment variables
+.env.local

@@ -1,0 +1,54 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Load optional .env.local file
+if [ -f .env.local ]; then
+  export $(grep -v '^#' .env.local | xargs)
+fi
+
+# Conditionally skip hooks
+if [ "$SKIP_HOOKS" = "true" ]; then
+  echo "🔁 SKIP_HOOKS is true — skipping pre-commit checks"
+  exit 0
+fi
+
+# Helper function to prompt user
+prompt_continue() {
+  echo "⚠️  Do you want to continue anyway? [y/N]"
+  read answer
+  case "$answer" in
+    [Yy]* ) echo "➡️  Continuing to next step...";;
+    * ) echo "🛑 Commit aborted."; exit 1;;
+  esac
+}
+
+echo "🛡️  Starting pre-commit checks..."
+
+# Step 1: Linting
+echo "🧹 Step 1: Linting..."
+if pnpm lint; then
+  echo "✅ Lint passed!"
+else
+  echo "❌ Lint failed."
+  prompt_continue
+fi
+
+# Step 2: Format check
+echo "🎨 Step 2: Format check..."
+if pnpm format:check; then
+  echo "✅ Format check passed!"
+else
+  echo "❌ Format check failed."
+  prompt_continue
+fi
+
+# Step 3: Testing
+echo "🧪 Step 3: Running tests..."
+if pnpm test; then
+  echo "✅ All tests passed!"
+else
+  echo "❌ Tests failed."
+  prompt_continue
+fi
+
+echo "🎉 All pre-commit checks completed — proceeding with commit!"
