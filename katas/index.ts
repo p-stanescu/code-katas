@@ -1,6 +1,6 @@
 import { env } from '../env.ts';
 
-export function log(): void {
+export function log(): string {
   console.log(env.SKIP_HOOKS);
 }
 
