@@ -1,13 +1,13 @@
-import tseslint from 'typescript-eslint';
 import prettier from 'eslint-config-prettier';
+import tseslint from 'typescript-eslint';
 
 export default [
   { ignores: ['node_modules', 'dist', 'coverage', 'jest.config.ts'] },
 
-  // Recommended TypeScript rules: https://typescript-eslint.io/getting-started/
+  // Recommended TypeScript rules (ref: https://typescript-eslint.io/getting-started/)
   ...tseslint.configs.recommended,
 
-  // Option stricter overrides and rules
+  // Optional stricter overrides and rules
   {
     files: ['**/*.ts', '**/*.tsx'],
     rules: {
