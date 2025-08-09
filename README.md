@@ -33,3 +33,5 @@ Currently the project is setup to not emit any Javascript files by design. This 
 
 // }
 ```
+
+Typescript list of recommended compiler options: [text](https://www.typescriptlang.org/docs/handbook/modules/guides/choosing-compiler-options.html#im-using-tsx) and base config options: [text](https://github.com/tsconfig/bases/?tab=readme-ov-file)
