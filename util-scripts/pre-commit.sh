@@ -1,5 +1,4 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
 
 if [ -f .env.local ]; then
   export $(grep -v '^#' .env.local | xargs)

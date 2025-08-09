@@ -1,0 +1,10 @@
+# Refer for explanation to following link:
+# https://lefthook.dev/configuration/
+
+# pre-push:
+
+pre-commit:
+  parallel: false
+  jobs:
+    - name: Pre-commit checks
+      run: bash ./util-scripts/pre-commit.sh
