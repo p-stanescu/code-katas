@@ -5,16 +5,14 @@ if [ -f .env.local ]; then
   export $(grep -v '^#' .env.local | xargs)
 fi
 
-# Conditionally skip hooks
 if [ "$SKIP_HOOKS" = "true" ]; then
   echo "🔁 SKIP_HOOKS is true — skipping pre-commit checks"
   exit 0
 fi
 
-echo "🛡️  Starting pre-commit checks...\n\n"
+echo "📋 Starting pre-commit checks...\n\n"
 
-# Step 1: Dependencies audit
-echo "🔒 Step 1: Security audit..."
+echo "🛡️ Dependency audit..."
 pnpm audit || exit_code=$?
 if [ "$exit_code" ]; then
   echo "❌ PNPM audit found vulnerabilities."
@@ -23,8 +21,7 @@ if [ "$exit_code" ]; then
 fi
 echo "✅ Audit passed!\n\n"
 
-# Step 2: Linting
-echo "🧹 Step 2: Linting..."
+echo "🧹 Linting..."
 pnpm lint || exit_code=$?
 if [ "$exit_code" ]; then
   echo "❌ Lint failed."
@@ -32,8 +29,7 @@ if [ "$exit_code" ]; then
 fi
 echo "✅ Lint passed!\n\n"
 
-# Step 3: Type Checking
-echo "📐 Step 3: Type checking..."
+echo "📐 Type checking..."
 pnpm typecheck || exit_code=$?
 if [ "$exit_code" ]; then
   echo "❌ Type check failed."
@@ -41,8 +37,7 @@ if [ "$exit_code" ]; then
 fi
 echo "✅ Type check passed!\n\n"
 
-# Step 4: Format Check
-echo "🎨 Step 4: Format check..."
+echo "🎨 Format check..."
 pnpm format:check || exit_code=$?
 if [ "$exit_code" ]; then
   echo "❌ Format check failed."
@@ -50,8 +45,7 @@ if [ "$exit_code" ]; then
 fi
 echo "✅ Format check passed!\n\n"
 
-# Step 5: Tests
-echo "🧪 Step 5: Running tests..."
+echo "🔎 Running tests..."
 pnpm test || exit_code=$?
 if [ "$exit_code" ]; then
   echo "❌ Tests failed."
