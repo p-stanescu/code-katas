@@ -6,5 +6,5 @@
 pre-commit:
   parallel: false
   jobs:
-    - name: Pre-commit checks
+    - name: repo checks
       run: bash ./util-scripts/pre-commit.sh
