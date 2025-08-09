@@ -30,5 +30,71 @@
 
   // Typescript rules
   "typescript.preferences.includePackageJsonAutoImports": "on",
-  "typescript.suggest.autoImports": true
+  "typescript.suggest.autoImports": true,
+
+  // --- Code Spell Checker configuration --- //
+  "cSpell.language": "en-GB",
+
+  // Controls the maximum number of spelling errors per document.
+  "cSpell.maxNumberOfProblems": 100,
+
+  // Controls the number of suggestions shown.
+  "cSpell.numSuggestions": 8,
+
+  // The minimum length of a word before checking it against a dictionary.
+  "cSpell.minWordLength": 4,
+
+  // Specify file types to spell check.
+  "cSpell.enabledLanguageIds": [
+    "javascript",
+    "javascriptreact",
+    "markdown",
+    "plaintext",
+    "typescript",
+    "typescriptreact",
+    "yaml",
+    "sql"
+  ],
+
+  // Enable / Disable the spell checker.
+  "cSpell.enabled": true,
+
+  // Words to add to dictionary for a workspace.
+  "cSpell.words": ["esbenp"],
+
+  // Enable / Disable compound words like 'errormessage'
+  "cSpell.allowCompoundWords": false,
+
+  // Words to be ignored and not suggested.
+  "cSpell.ignoreWords": ["behaviour"],
+
+  // User words to add to dictionary.  Should only be in the user settings.
+  "cSpell.userWords": [],
+
+  // Specify paths/files to ignore.
+  "cSpell.ignorePaths": [
+    "node_modules", // this will ignore anything the node_modules directory
+    "**/node_modules", // the same for this one
+    "**/node_modules/**", // the same for this one
+    "node_modules/**", // Doesn't currently work due to how the current working directory is determined.
+    "vscode-extension", //
+    ".git", // Ignore the .git directory
+    "pnpm-lock.yaml",
+    "package.json",
+    "./dist"
+  ],
+
+  // flagWords - list of words to be always considered incorrect
+  // This is useful for offensive words and common spelling errors.
+  // For example "hte" should be "the"`
+
+  // Set the delay before spell checking the document. Default is 50.
+  "cSpell.spellCheckDelayMs": 50,
+
+  // Set Diagnostic Reporting Level
+  //   Error - Report Spelling Issues as Errors
+  //   Warning - Report Spelling Issues as Warnings
+  //   Information - Report Spelling Issues as Information (default)
+  //   Hint - Report Spelling Issues as Hints, will not show up in Problems
+  "cSpell.diagnosticLevel": "Information"
 }
