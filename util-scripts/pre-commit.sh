@@ -9,16 +9,16 @@ if [ "$SKIP_HOOKS" = "true" ]; then
   exit 0
 fi
 
-echo "📋 Starting pre-commit checks...\n\n"
+printf "📋 Starting pre-commit checks...\n\n"
 
-echo "🛡️ Dependency audit..."
+printf "🛡️ Dependency audit..."
 pnpm audit || exit_code=$?
 if [ "$exit_code" ]; then
   echo "❌ PNPM audit found vulnerabilities."
   echo "💡 Run 'pnpm audit --fix' to automatically fix issues."
   exit 1
 fi
-echo "✅ Audit passed!\n\n"
+printf "✅ Audit passed!\n\n"
 
 echo "🧹 Linting..."
 pnpm lint || exit_code=$?
@@ -26,7 +26,7 @@ if [ "$exit_code" ]; then
   echo "❌ Lint failed."
   exit 1
 fi
-echo "✅ Lint passed!\n\n"
+printf "✅ Lint passed!\n\n"
 
 echo "📐 Type checking..."
 pnpm typecheck || exit_code=$?
@@ -34,7 +34,7 @@ if [ "$exit_code" ]; then
   echo "❌ Type check failed."
   exit 1
 fi
-echo "✅ Type check passed!\n\n"
+printf "✅ Type check passed!\n\n"
 
 echo "🎨 Format check..."
 pnpm format:check || exit_code=$?
@@ -42,7 +42,7 @@ if [ "$exit_code" ]; then
   echo "❌ Format check failed."
   exit 1
 fi
-echo "✅ Format check passed!\n\n"
+printf "✅ Format check passed!\n\n"
 
 echo "🔎 Running tests..."
 pnpm test || exit_code=$?
@@ -50,7 +50,7 @@ if [ "$exit_code" ]; then
   echo "❌ Tests failed."
   exit 1
 fi
-echo "✅ All tests passed!\n\n"
+printf "✅ All tests passed!\n\n"
 
 echo "🎉 All checks completed — commit ready!"
 exit 0
