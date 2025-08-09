@@ -18,7 +18,7 @@ echo "🔒 Step 1: Security audit..."
 pnpm audit || exit_code=$?
 if [ "$exit_code" ]; then
   echo "❌ PNPM audit found vulnerabilities."
-  echo "💡 Run 'pnpm audit --fix' to automatically fix issues, or 'pnpm audit' to see details."
+  echo "💡 Run 'pnpm audit --fix' to automatically fix issues."
   exit 1
 fi
 echo "✅ Audit passed!"
