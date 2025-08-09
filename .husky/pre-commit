@@ -11,7 +11,7 @@ if [ "$SKIP_HOOKS" = "true" ]; then
   exit 0
 fi
 
-echo "🛡️  Starting pre-commit checks..."
+echo "🛡️  Starting pre-commit checks...\n\n"
 
 # Step 1: Dependencies audit
 echo "🔒 Step 1: Security audit..."
@@ -21,7 +21,7 @@ if [ "$exit_code" ]; then
   echo "💡 Run 'pnpm audit --fix' to automatically fix issues."
   exit 1
 fi
-echo "✅ Audit passed!"
+echo "✅ Audit passed!\n\n"
 
 # Step 2: Linting
 echo "🧹 Step 2: Linting..."
@@ -30,7 +30,7 @@ if [ "$exit_code" ]; then
   echo "❌ Lint failed."
   exit 1
 fi
-echo "✅ Lint passed!"
+echo "✅ Lint passed!\n\n"
 
 # Step 3: Type Checking
 echo "📐 Step 3: Type checking..."
@@ -39,7 +39,7 @@ if [ "$exit_code" ]; then
   echo "❌ Type check failed."
   exit 1
 fi
-echo "✅ Type check passed!"
+echo "✅ Type check passed!\n\n"
 
 # Step 4: Format Check
 echo "🎨 Step 4: Format check..."
@@ -48,7 +48,7 @@ if [ "$exit_code" ]; then
   echo "❌ Format check failed."
   exit 1
 fi
-echo "✅ Format check passed!"
+echo "✅ Format check passed!\n\n"
 
 # Step 5: Tests
 echo "🧪 Step 5: Running tests..."
@@ -57,7 +57,7 @@ if [ "$exit_code" ]; then
   echo "❌ Tests failed."
   exit 1
 fi
-echo "✅ All tests passed!"
+echo "✅ All tests passed!\n\n"
 
 echo "🎉 All checks completed — commit ready!"
 exit 0
