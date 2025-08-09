@@ -5,13 +5,15 @@
   "editor.wordWrapColumn": 80,
   "editor.wrappingIndent": "indent",
 
-  // ESLint + Prettier synchronization
-  "eslint.validate": ["typescript"],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
   },
 
-  // Format using Prettier, not ESlint
+  // ESLint
+  "eslint.validate": ["typescript"],
+
+  // Format using Prettier
   "eslint.format.enable": false,
 
   // File handling settings
@@ -25,6 +27,8 @@
 
   // Package manager enforcement - pnpm only
   "npm.packageManager": "pnpm",
+
+  // Typescript rules
   "typescript.preferences.includePackageJsonAutoImports": "on",
   "typescript.suggest.autoImports": true
 }

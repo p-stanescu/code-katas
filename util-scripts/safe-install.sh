@@ -1,7 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 
-# Step 1: Argument validation
 if [ "$#" -eq 0 ]; then
   echo "❌ Please provide one or more packages to audit and install."
   echo "👉 Usage: pnpm run safe-install <pkg[@version]> [pkg2 ...]"
@@ -16,43 +15,36 @@ done
 
 echo ""
 
-# Step 2: Install Socket CLI if not available
-if ! command -v socket &> /dev/null; then
-  echo "📦 Socket CLI not found. Installing..."
-  pnpm add -D @socketsecurity/cli
-  echo "✅ Socket CLI installed successfully"
-fi
-
-# Step 3: Security audit with Socket
 for pkg in "$@"; do
-  echo "🔍 Auditing $pkg with Socket..."
+  echo "🔍 Auditing $pkg with npq..."
+  if npq_output=$(echo "N" | npx npq "$pkg" 2>&1); then
+    # Display the npq output but filter out the install prompt lines
+    echo "$npq_output" | grep -v "Continue install" | grep -v "^N$"
+    echo "✅ npq audit completed for $pkg"
 
-  # Use Socket to audit the package before installation
-  if socket npm view "$pkg"; then
-    echo "✅ Socket audit completed for $pkg"
+    echo "🔍 Checking $pkg for typosquatting..."
+    npx anti-typosquatting "$pkg" || { echo "❌ Typosquatting check failed for $pkg"; exit 1; }
+    echo "✅ Typosquatting check completed for $pkg"
 
-    echo ""
     read -rp "⚠️  Proceed to install $pkg? [y/N] " confirm
     if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
       echo "⏭️  Skipping $pkg"
-      continue
+      exit 1
     fi
 
     echo "📦 Installing $pkg via pnpm..."
     pnpm add "$pkg"
     echo "✅ Successfully installed $pkg"
+    echo ""
+    echo "🔍 Running post-install audit..."
+    pnpm audit || echo "⚠️  Audit completed with issues. Please review."
+
+    echo ""
+    echo "🎉 Safe install process completed!"
   else
-    echo "❌ Socket audit failed for $pkg (security issues found or package doesn't exist)"
+    echo "❌ npq audit failed for $pkg (security issues found or package doesn't exist)"
     echo "⏭️  Skipping $pkg"
-    continue
+    exit 0
   fi
 
-  echo ""
 done
-
-echo ""
-echo "🔍 Running post-install audit..."
-pnpm audit || echo "⚠️  Audit completed with issues. Please review."
-
-echo ""
-echo "🎉 Safe install process completed!"
