@@ -43,8 +43,8 @@
     "only-allow": "1.2.1",
     "prettier": "3.6.2",
     "tsx": "4.20.3",
-    "typescript": "5.4.5",
-    "typescript-eslint": "^8.39.0",
+    "typescript": "5.9.2",
+    "typescript-eslint": "8.39.0",
     "vitest": "3.2.4"
   },
   "dependencies": {

@@ -1,29 +1,40 @@
 {
   "compilerOptions": {
-    // Platform configuration rules
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "types": ["node"],
+    // Controls the module system used in compiled JavaScript output (latest stable Node.js standards)
+    "module": "nodenext",
 
-    // Interop
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
+    // Determines import statement resolution to actual files (latest stable Node.js algorithm)
+    "moduleResolution": "nodenext",
+
+    // Interop - must be used to import and compile CommonJS imports (most npm packages)
     "esModuleInterop": true,
 
-    // Build
-    "outDir": "./dist",
+    // Javascript (ECMAScript) version matching Node version in .nvmrc (Node 22 supports ES2022+)
+    "target": "es2022",
+
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+
+    // Node.js global types and APIs
+    "types": ["node"],
 
     // Type safety rules
-    "isolatedModules": true,
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
     "noImplicitOverride": true,
-    "useUnknownInCatchVariables": true,
+    "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true
-  }
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "exactOptionalPropertyTypes": true,
+    "useUnknownInCatchVariables": true,
+
+    // Module syntax safety
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+
+    // Import safety
+    "noUncheckedSideEffectImports": true
+  },
+  "exclude": ["node_modules", "dist", "util-scripts", ".vscode"]
 }
