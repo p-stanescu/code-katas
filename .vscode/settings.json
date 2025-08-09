@@ -48,10 +48,10 @@
   "cSpell.enabledLanguageIds": [
     "javascript",
     "javascriptreact",
-    "markdown",
-    "plaintext",
     "typescript",
     "typescriptreact",
+    "markdown",
+    "plaintext",
     "yaml",
     "sql"
   ],
@@ -64,9 +64,6 @@
 
   // Enable / Disable compound words like 'errormessage'
   "cSpell.allowCompoundWords": false,
-
-  // Words to be ignored and not suggested.
-  "cSpell.ignoreWords": ["behaviour"],
 
   // User words to add to dictionary.  Should only be in the user settings.
   "cSpell.userWords": [],
@@ -83,10 +80,6 @@
     "package.json",
     "./dist"
   ],
-
-  // flagWords - list of words to be always considered incorrect
-  // This is useful for offensive words and common spelling errors.
-  // For example "hte" should be "the"`
 
   // Set the delay before spell checking the document. Default is 50.
   "cSpell.spellCheckDelayMs": 50,
