@@ -3,7 +3,7 @@
     // Controls the module system used in compiled JavaScript output (latest stable Node.js standards)
     "module": "nodenext",
 
-    // Determines import statement resolution to actual files (latest stable Node.js algorithm)
+    // Determines import statement resolution to actual files (latest stable Node.js features)
     "moduleResolution": "nodenext",
 
     // Interop - must be used to import and compile CommonJS imports (most npm packages)
