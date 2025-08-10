@@ -15,6 +15,8 @@ Currently the project is setup to not emit any Javascript files by design. This 
 
 // ...other current config
 
+// "module": "es2022", <---change
+
 // "moduleResolution": "Bundler", <---change
 
 // // "allowImportingTsExtensions": true, <---remove
