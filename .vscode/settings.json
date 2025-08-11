@@ -60,7 +60,16 @@
   "cSpell.enabled": true,
 
   // Words to add to dictionary for a workspace.
-  "cSpell.words": ["dbaeumer", "esbenp", "lefthook", "nodenext", "vars"],
+  "cSpell.words": [
+    "alefragnani",
+    "dbaeumer",
+    "esbenp",
+    "lefthook",
+    "mhutchie",
+    "nodenext",
+    "vars",
+    "zignd"
+  ],
 
   // Enable / Disable compound words like 'errormessage'
   "cSpell.allowCompoundWords": false,
