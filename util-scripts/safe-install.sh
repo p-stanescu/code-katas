@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# safe-install.sh — step 0.6
 
 set -euo pipefail
 
