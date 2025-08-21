@@ -1,50 +1,23 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# safe-install.sh — step 0.3
+
 set -euo pipefail
 
-if [ "$#" -eq 0 ]; then
-  echo "❌ Please provide one or more packages to audit and install."
-  echo "👉 Usage: pnpm run safe-install <pkg[@version]> [pkg2 ...]"
+# Check that exactly ONE argument is given
+if [ "$#" -ne 1 ]; then
+  printf "❌ Exactly one dependency must be provided.\n\n"
+  printf "⚠️ Usage: pnpm run safe-install <dependency_package>\n\n"
   exit 1
 fi
 
-echo "✅ Arguments provided: $#"
-echo "📋 Packages to process:"
-for pkg in "$@"; do
-  echo "  - $pkg"
-done
+dependency_package="$1"
 
-echo ""
+printf "📦 Preparing to validate and install: %s\n" "$dependency_package"
 
-for pkg in "$@"; do
-  echo "🔍 Auditing $pkg with npq..."
-  if npq_output=$(echo "N" | npx npq "$pkg" 2>&1); then
-    # Display the npq output but filter out the install prompt lines
-    echo "$npq_output" | grep -v "Continue install" | grep -v "^N$"
-    echo "✅ npq audit completed for $pkg"
+# Check the package exists and capture the latest version
+if ! resolved_version="$(pnpm view "$dependency_package" version --json)"; then
+  printf "❌ Could not find '%s' in the npm registry (see error above).\n\n" "$dependency_package"
+  exit 1
+fi
 
-    echo "🔍 Checking $pkg for typosquatting..."
-    npx anti-typosquatting "$pkg" || { echo "❌ Typosquatting check failed for $pkg"; exit 1; }
-    echo "✅ Typosquatting check completed for $pkg"
-
-    read -rp "⚠️  Proceed to install $pkg? [y/N] " confirm
-    if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
-      echo "⏭️  Skipping $pkg"
-      exit 1
-    fi
-
-    echo "📦 Installing $pkg via pnpm..."
-    pnpm add "$pkg"
-    echo "✅ Successfully installed $pkg"
-    echo ""
-    echo "🔍 Running post-install audit..."
-    pnpm audit || echo "⚠️  Audit completed with issues. Please review."
-
-    echo ""
-    echo "🎉 Safe install process completed!"
-  else
-    echo "❌ npq audit failed for $pkg (security issues found or package doesn't exist)"
-    echo "⏭️  Skipping $pkg"
-    exit 0
-  fi
-
-done
+printf "✅ Found '%s' (latest version: %s)\n\n" "$dependency_package" "$resolved_version"
