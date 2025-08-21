@@ -9,7 +9,7 @@
     "pnpm": ">=10.0.0"
   },
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
+    "preinstall": "bash ./util-scripts/enforce-pnpm.sh",
     "postinstall": "lefthook install",
     "safe-install": "bash ./util-scripts/safe-install.sh",
     "start": "tsx katas/index.ts",
@@ -39,7 +39,7 @@
     "@vitest/ui": "3.2.4",
     "eslint": "9.32.0",
     "eslint-config-prettier": "10.1.8",
-    "lefthook": "^1.12.2",
+    "lefthook": "1.12.2",
     "only-allow": "1.2.1",
     "prettier": "3.6.2",
     "tsx": "4.20.3",
