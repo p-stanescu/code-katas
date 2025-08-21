@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A repository for challenges from Code Wars",
   "type": "module",
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@10.15.0",
   "engines": {
     "node": ">=22.0.0",
     "pnpm": ">=10.0.0"
