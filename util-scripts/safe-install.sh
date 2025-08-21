@@ -62,7 +62,7 @@ printf '{ "name": "tmp-scan", "private": true }' > "$tmpdir/package.json"
   pnpm add --lockfile-only --ignore-scripts --silent "${dependency_package}@${resolved_version}" || true
 
   printf "🔍 Running security check with osv-scanner…\n\n"
-  osv-scanner --format table --lockfile pnpm-lock.yaml || true
+  osv-scanner scan -L pnpm-lock.yaml --format table || true
 )
 
 rm -rf "$tmpdir"
