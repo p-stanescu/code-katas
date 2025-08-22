@@ -1,7 +1,5 @@
-# Refer for explanation to following link:
+# Refer for usage to the following link:
 # https://lefthook.dev/configuration/
-
-# pre-push:
 
 pre-commit:
   parallel: false
