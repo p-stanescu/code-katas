@@ -14,7 +14,7 @@ printf "📋 Starting pre-commit checks...\n\n"
 printf "🔐 Secret scan..."
 pnpm secrets:staged || exit_code=$?
 if [ "$exit_code" ]; then
-  printf "\n❌ Potential secrets detected! commit blocked.\n"
+  printf "\n❌ Potential secrets detected! Commit blocked.\n"
   exit 1
 fi
 printf "✅ No secrets found.\n\n"
