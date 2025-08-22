@@ -14,10 +14,10 @@ printf "📋 Starting pre-commit checks...\n\n"
 printf "🔐 Secret scan..."
 gitleaks protect --staged --redact
 if [ $? -ne 0 ]; then
-  printf "❌ Potential secrets detected — commit blocked."
+  printf "❌ Potential secrets detected! Git commit blocked."
   exit 1
 fi
-echo "✅ No secrets found."
+printf "✅ No secrets found.\n\n"
 
 printf "🛡️ Dependency audit..."
 
@@ -65,5 +65,5 @@ if [ "$exit_code" ]; then
 fi
 printf "✅ All tests passed!\n\n"
 
-printf "🎉 All checks and tests completed — commit ready!"
+printf "🎉 All checks and tests successfully completed — commit ready!"
 exit 0
