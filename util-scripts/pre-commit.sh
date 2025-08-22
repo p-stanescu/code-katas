@@ -5,22 +5,32 @@ if [ -f .env.local ]; then
 fi
 
 if [ "$SKIP_HOOKS" = "true" ]; then
-  echo "🔁 SKIP_HOOKS is true — skipping pre-commit checks"
+  printf "🔁 SKIP_HOOKS is true — skipping pre-commit checks"
   exit 0
 fi
 
 printf "📋 Starting pre-commit checks...\n\n"
 
+printf "🔐 Secret scan..."
+gitleaks protect --staged --redact
+if [ $? -ne 0 ]; then
+  printf "❌ Potential secrets detected — commit blocked."
+  exit 1
+fi
+echo "✅ No secrets found."
+
 printf "🛡️ Dependency audit..."
+
 pnpm audit || exit_code=$?
 if [ "$exit_code" ]; then
-  echo "❌ PNPM audit found vulnerabilities."
-  echo "💡 Run 'pnpm audit --fix' to automatically fix issues."
+  printf "❌ PNPM audit found vulnerabilities."
+  printf "💡 Run 'pnpm audit --fix' to automatically fix issues."
   exit 1
 fi
 printf "✅ Audit passed!\n\n"
 
-echo "🧹 Linting..."
+printf "🧹 Linting..."
+
 pnpm lint || exit_code=$?
 if [ "$exit_code" ]; then
   echo "❌ Lint failed."
@@ -28,29 +38,32 @@ if [ "$exit_code" ]; then
 fi
 printf "✅ Lint passed!\n\n"
 
-echo "📐 Type checking..."
+printf "📐 Type checking..."
+
 pnpm typecheck || exit_code=$?
 if [ "$exit_code" ]; then
-  echo "❌ Type check failed."
+  printf "❌ Type check failed."
   exit 1
 fi
 printf "✅ Type check passed!\n\n"
 
-echo "🎨 Format check..."
+printf "🎨 Format check..."
+
 pnpm format:check || exit_code=$?
 if [ "$exit_code" ]; then
-  echo "❌ Format check failed."
+  printf "❌ Format check failed."
   exit 1
 fi
 printf "✅ Format check passed!\n\n"
 
-echo "🔎 Running tests..."
+printf "🔎 Running tests..."
+
 pnpm test || exit_code=$?
 if [ "$exit_code" ]; then
-  echo "❌ Tests failed."
+  printf "❌ Tests failed."
   exit 1
 fi
 printf "✅ All tests passed!\n\n"
 
-echo "🎉 All checks completed — commit ready!"
+printf "🎉 All checks and tests completed — commit ready!"
 exit 0

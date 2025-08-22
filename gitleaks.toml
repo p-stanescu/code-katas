@@ -1,0 +1,34 @@
+title = "Code Katas Repo Secret Scanning Rules"
+
+# Tell gitleaks where to look
+
+[extend]
+useDefault = true
+
+# Allow committed example env files only (but NOT real .env/.env.local)
+
+[[allowlist]]
+description = "Allow example env files anywhere"
+paths = [
+  '(?i)(^|/)\.env\.example$',
+  '(?i)(^|/)[^/]+\.env\.example$'
+]
+
+# Ignore snapshot artefacts (Vitest/Jest)
+
+[[allowlist]]
+description = "Ignore test snapshots"
+paths = [
+  '(^|/)tests/.*/__snapshots__/.*',
+  '(^|/)katas/.*/__snapshots__/.*',
+  '(^|/).*\.snap$'
+]
+
+# Ignore test fixtures folders if present
+
+[[allowlist]]
+description = "Ignore test fixtures"
+paths = [
+  '(^|/)tests/.*/(__)?fixtures(__)?/.*',
+  '(^|/)katas/.*/(__)?fixtures(__)?/.*'
+]

@@ -12,6 +12,8 @@
     "preinstall": "bash ./util-scripts/enforce-pnpm.sh",
     "postinstall": "lefthook install",
     "safe-install": "bash ./util-scripts/safe-install.sh",
+    "secrets:staged": "gitleaks protect --staged --redact",
+    "secrets:all-files": "gitleaks detect --source . --redact",
     "start": "tsx katas/index.ts",
     "run": "pnpm run build && pnpm start",
     "clear:dist": "rm -rf dist",
@@ -26,11 +28,15 @@
     "format:check": "prettier --check .",
     "format:debug": "prettier . --write --debug-check",
     "format:list-different": "prettier . --list-different",
-    "check:all": "pnpm typecheck && pnpm lint && pnpm format:check"
+    "check:all": "pnpm typecheck && pnpm lint && pnpm format:check",
+    "undo:commit": "git reset --soft HEAD~1",
+    "undo:commit:hard": "git reset --hard HEAD~1"
   },
   "author": "p-stanescu",
   "license": "ISC",
   "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@socketsecurity/cli": "1.0.87",
     "@types/node": "24.2.1",
     "@typescript-eslint/eslint-plugin": "8.39.0",
@@ -49,7 +55,6 @@
   },
   "dependencies": {
     "dotenv": "17.2.1",
-    "safe-install": "1.0.12",
     "zod": "4.0.15"
   }
 }
