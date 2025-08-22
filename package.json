@@ -29,8 +29,10 @@
     "format:debug": "prettier . --write --debug-check",
     "format:list-different": "prettier . --list-different",
     "check:all": "pnpm typecheck && pnpm lint && pnpm format:check",
-    "undo:commit": "git reset --soft HEAD~1",
-    "undo:commit:hard": "git reset --hard HEAD~1"
+    "undo:commit:soft": "git reset --soft HEAD~1",
+    "undo:commit:hard": "git reset --hard HEAD~1",
+    "delete:commit": "bash ./util-scripts/git-delete-local-commits.sh",
+    "git:reset:menu": "bash ./util-scripts/git-reset-local-commits.sh"
   },
   "author": "p-stanescu",
   "license": "ISC",

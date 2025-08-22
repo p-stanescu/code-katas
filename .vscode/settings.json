@@ -45,22 +45,26 @@
   "cSpell.minWordLength": 4,
 
   // Specify file types to spell check.
-  "cSpell.enabledLanguageIds": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "markdown",
-    "plaintext",
-    "yaml",
-    "sql"
-  ],
+  "cSpell.enabledFileTypes": {
+    "javascript": true,
+    "javascriptreact": true,
+    "typescript": true,
+    "typescriptreact": true,
+    "markdown": true,
+    "plaintext": true,
+    "yaml": true,
+    "toml": true,
+    "sql": true,
+    "json": true,
+    "shellscript": true
+  },
 
   // Enable / Disable the spell checker.
   "cSpell.enabled": true,
 
   // Words to add to dictionary for a workspace.
   "cSpell.words": [
+    "abbrev",
     "alefragnani",
     "dbaeumer",
     "esbenp",
@@ -69,6 +73,10 @@
     "nicoespeon",
     "nodenext",
     "quokka",
+    "reflog",
+    "reflogs",
+    "subj",
+    "toplevel",
     "vars",
     "Vitest",
     "wallabyjs",
