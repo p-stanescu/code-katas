@@ -35,8 +35,8 @@
   "author": "p-stanescu",
   "license": "ISC",
   "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
     "@socketsecurity/cli": "1.0.87",
     "@types/node": "24.2.1",
     "@typescript-eslint/eslint-plugin": "8.39.0",

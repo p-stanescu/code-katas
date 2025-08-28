@@ -1,34 +1,21 @@
-title = "Code Katas Repo Secret Scanning Rules"
-
-# Tell gitleaks where to look
+title = "Code Katas repo secret scanning rules"
 
 [extend]
 useDefault = true
 
-# Allow committed example env files only (but NOT real .env/.env.local)
-
-[[allowlist]]
-description = "Allow example env files anywhere"
+[[allowlists]]
+description = "Files to exclude from the scan"
 paths = [
-  '(?i)(^|/)\.env\.example$',
-  '(?i)(^|/)[^/]+\.env\.example$'
+  '''(?i)(^|/)\.env\.example$''',
+  '''(?i)(^|/)[^/]+\.env\.example$''',
+  '''(^|/)node_modules(/|$)''',
+  '''(^|/)pnpm-lock\.yaml$''',
+  '''(^|/)dist(/|$)''',
+  '''(^|/)build(/|$)'''
 ]
 
-# Ignore snapshot artefacts (Vitest/Jest)
-
-[[allowlist]]
-description = "Ignore test snapshots"
-paths = [
-  '(^|/)tests/.*/__snapshots__/.*',
-  '(^|/)katas/.*/__snapshots__/.*',
-  '(^|/).*\.snap$'
-]
-
-# Ignore test fixtures folders if present
-
-[[allowlist]]
-description = "Ignore test fixtures"
-paths = [
-  '(^|/)tests/.*/(__)?fixtures(__)?/.*',
-  '(^|/)katas/.*/(__)?fixtures(__)?/.*'
-]
+[[rules]]
+id = "generic-secret-keywords"
+description = "Detect common secret-related keywords"
+regex = '''(?i)(password|passwd|pwd|secret|token|api[_-]?key|apikey|auth|credential|private[_-]?key|ssh[_-]?key|encryption[_-]?key)'''
+secretGroup = 0
