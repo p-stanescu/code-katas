@@ -45,6 +45,7 @@
     "@vitest/ui": "3.2.4",
     "eslint": "9.32.0",
     "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-sonarjs": "^3.0.5",
     "lefthook": "1.12.2",
     "only-allow": "1.2.1",
     "prettier": "3.6.2",

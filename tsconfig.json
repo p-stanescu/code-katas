@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    // Controls the module system used in compiled JavaScript output (latest stable Node.js standards)
+    // Controls the module system used in compiled JavaScript output (follows the latest stable Node.js standards)
     "module": "nodenext",
 
     // Determines import statement resolution to actual files (latest stable Node.js features)
@@ -9,14 +9,14 @@
     // Interop - must be used to import and compile CommonJS imports (most npm packages)
     "esModuleInterop": true,
 
-    // Javascript (ECMAScript) version matching Node version in .nvmrc (Node 22 supports ES2022+)
+    // ECMAScript version matching Node version in .nvmrc
     "target": "es2022",
 
     "allowImportingTsExtensions": true,
     "noEmit": true,
 
     // Node.js global types and APIs
-    "types": ["node"],
+    "types": ["node", "vitest/globals"],
 
     // Type safety rules
     "strict": true,
@@ -36,5 +36,12 @@
     // Import safety
     "noUncheckedSideEffectImports": true
   },
-  "exclude": ["node_modules", "dist", "util-scripts", ".vscode"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "util-scripts",
+    ".vscode",
+    "*.config.cjs"
+  ]
 }
