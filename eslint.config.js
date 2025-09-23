@@ -46,6 +46,6 @@ export default [
     },
   },
 
-  // Switching off ESLint rules that conflict with Prettier formatting rules (ref: https://github.com/prettier/eslint-config-prettier)
+  // Turns off all rules that are unnecessary or might conflict with Prettier (ref: https://github.com/prettier/eslint-config-prettier)
   prettier,
 ];
