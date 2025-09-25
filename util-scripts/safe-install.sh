@@ -3,10 +3,8 @@
 set -euo pipefail
 
 confirm() {
-  question="$1"
-  printf "%s [y/N] " "$question"
+  printf "%s [y/N] " "$1"
   read -r reply
-
   if [ "$reply" = "y" ] || [ "$reply" = "Y" ]; then
     return 0
   else
@@ -29,14 +27,15 @@ printf "📦 Preparing to validate and install: %s\n" "$dependency_package"
 
 # --------------// Package verification \\----------------
 
-if ! resolved_version="$(pnpm view "$dependency_package" version)"; then
+resolved_version="$(pnpm view "$dependency_package" version)"
+if [ $? -eq 0 ]; then
+  printf "✅ Found '%s' (latest version: %s)\n\n" "$dependency_package" "$resolved_version"
+else
   printf "❌ Could not find '%s' in the npm registry (see error above).\n\n" "$dependency_package"
   exit 1
 fi
 
-printf "✅ Found '%s' (latest version: %s)\n\n" "$dependency_package" "$resolved_version"
-
-# --------------// Package metadata \\----------------
+# --------------// Display package metadata \\----------------
 
 description="$(pnpm view "$dependency_package" description || echo "N/A")"
 license="$(pnpm view "$dependency_package" license || echo "N/A")"
@@ -50,24 +49,20 @@ printf "Homepage: %s\n" "$homepage"
 printf "Repository: %s\n" "$repository"
 printf "Maintainers: %s\n\n" "$maintainers"
 
-# --------------// Security scanning \\----------------
+# --------------// Security scanning (OSV API) \\----------------
 
-tmpdir="./.tmp-scan"
-mkdir -p "$tmpdir"
+printf "🔍 Checking OSV for %s@%s…\n\n" "$dependency_package" "$resolved_version"
 
-printf '{ "name": "tmp-scan", "private": true }' > "$tmpdir/package.json"
+osv_response="$(curl -s -H 'Content-Type: application/json' \
+  -d "{\"package\": {\"ecosystem\": \"npm\", \"name\": \"$dependency_package\"}, \"version\": \"$resolved_version\"}" \
+  https://api.osv.dev/v1/query)"
 
-(
-  cd "$tmpdir"
-  pnpm add --lockfile-only --ignore-scripts --silent "${dependency_package}@${resolved_version}" || true
-
-  printf "🔍 Running security check with osv-scanner…\n\n"
-  osv-scanner scan -L pnpm-lock.yaml --format table || true
-)
-
-rm -rf "$tmpdir"
-
-printf "✅ osv-scanner check finished.\n\n"
+if [ "$osv_response" = "{}" ]; then
+  printf "✅ No known vulnerabilities found by OSV.\n\n"
+else
+  printf "⚠️  Vulnerabilities reported by OSV for %s@%s:\n\n" "$dependency_package" "$resolved_version"
+  printf "%s\n\n" "$osv_response"
+fi
 
 # --------------// Package installation \\----------------
 
