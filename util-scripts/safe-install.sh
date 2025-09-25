@@ -25,6 +25,21 @@ dependency_package="$1"
 
 printf "📦 Preparing to validate and install: %s\n" "$dependency_package"
 
+# --------------// Typosquat check \\----------------
+
+printf "🔍 Typosquat check for %s@%s…\n\n" "$resolved_name" "$resolved_version"
+
+pnpm exec socket-npm info "${resolved_name}@${resolved_version}"
+exit_code=$?
+
+if [ "$exit_code" -eq 0 ]; then
+  printf "\n⚠️  Please review the above Socket report carefully.\n"
+  confirm "Do you still want to proceed with installation of '$resolved_name@$resolved_version'?"
+else
+  printf "\n❌ Socket check reported supply-chain risks. Commit blocked.\n"
+  exit 1
+fi
+
 # --------------// Package verification \\----------------
 
 resolved_name="$(pnpm view "$dependency_package" name)"
