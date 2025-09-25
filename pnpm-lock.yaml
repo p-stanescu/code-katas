@@ -15,9 +15,6 @@ importers:
         specifier: 4.0.15
         version: 4.0.15
     devDependencies:
-      '@socketsecurity/cli':
-        specifier: 1.0.87
-        version: 1.0.87
       '@types/node':
         specifier: 24.2.1
         version: 24.2.1
@@ -441,11 +438,6 @@ packages:
     resolution: {integrity: sha512-CvUo2ixeIQGtF6WvuB87XWqPQkoFAFqW+HUo/WzHwuHDvIwZCtjdWXoYCcr06iKGydiqTclC4jU/TNObC/xKZg==}
     cpu: [x64]
     os: [win32]
-
-  '@socketsecurity/cli@1.0.87':
-    resolution: {integrity: sha512-x37GsvwZZvb6TVgBKBTjaZxclrBvwNHhREkCdAwSu2MlEGY17CQVHgdQw1hbdduZ8HZ2iG86Dp5uNsHrXLi0DA==}
-    engines: {node: '>=18'}
-    hasBin: true
 
   '@types/chai@5.2.2':
     resolution: {integrity: sha512-8kB30R7Hwqf40JPiKhVzodJs2Qc1ZJ5zuT3uzw5Hq/dhNCl3G3l83jfpdI1e20BP348+fV7VIL/+FxaXkqBmWg==}
@@ -1630,8 +1622,6 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.46.2':
     optional: true
-
-  '@socketsecurity/cli@1.0.87': {}
 
   '@types/chai@5.2.2':
     dependencies:
