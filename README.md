@@ -4,7 +4,7 @@ A repo to write solutions for the code katas from Code Wars
 
 ## Typescript config to generate Javascript files
 
-Currently the project is setup to not emit any Javascript files by design. This can be changed in the future by using the following configuration:
+Currently the project is setup to not emit any Javascript files by design. This can be changed in the future by using the following configuration in the tsconfig.json file:
 
 ```
 // {
@@ -21,11 +21,6 @@ Currently the project is setup to not emit any Javascript files by design. This 
 
 // // "allowImportingTsExtensions": true, <---remove
 // "noEmit": false, <---change
-
-// Source maps and declarations (not needed with noEmit: true)
-// "sourceMap": true,
-// "declaration": true,
-// "declarationMap": true
 
 // //Build
 // "outDir": "./dist", <---add
