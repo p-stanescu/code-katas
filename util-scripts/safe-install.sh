@@ -27,9 +27,10 @@ printf "📦 Preparing to validate and install: %s\n" "$dependency_package"
 
 # --------------// Package verification \\----------------
 
+resolved_name="$(pnpm view "$dependency_package" name)"
 resolved_version="$(pnpm view "$dependency_package" version)"
-if [ $? -eq 0 ]; then
-  printf "✅ Found '%s' (latest version: %s)\n\n" "$dependency_package" "$resolved_version"
+if [ $? -eq 0 ] && [ -n "$resolved_name" ] && [ -n "$resolved_version" ]; then
+  printf "✅ Found '%s' (resolved version: %s)\n\n" "$resolved_name" "$resolved_version"
 else
   printf "❌ Could not find '%s' in the npm registry (see error above).\n\n" "$dependency_package"
   exit 1
@@ -51,22 +52,27 @@ printf "Maintainers: %s\n\n" "$maintainers"
 
 # --------------// Security scanning (OSV API) \\----------------
 
-printf "🔍 Checking OSV for %s@%s…\n\n" "$dependency_package" "$resolved_version"
+printf "🔍 Checking OSV for %s@%s…\n\n" "$resolved_name" "$resolved_version"
 
-osv_response="$(curl -s -H 'Content-Type: application/json' \
-  -d "{\"package\": {\"ecosystem\": \"npm\", \"name\": \"$dependency_package\"}, \"version\": \"$resolved_version\"}" \
-  https://api.osv.dev/v1/query)"
+osv_response="$(curl -s -X POST https://api.osv.dev/v1/query \
+  -H 'Content-Type: application/json' \
+  -d "{\"package\":{\"ecosystem\":\"npm\",\"name\":\"$resolved_name\"},\"version\":\"$resolved_version\"}")"
 
-if [ "$osv_response" = "{}" ]; then
-  printf "✅ No known vulnerabilities found by OSV.\n\n"
+if [ $? -ne 0 ]; then
+  printf "ℹ️  OSV check could not be completed (network or API error). Proceeding without OSV results.\n\n"
 else
-  printf "⚠️  Vulnerabilities reported by OSV for %s@%s:\n\n" "$dependency_package" "$resolved_version"
-  printf "%s\n\n" "$osv_response"
+  if [ "$osv_response" = "{}" ]; then
+    printf "✅ No known vulnerabilities found by OSV.\n\n"
+  else
+    printf "❌ Vulnerabilities reported by OSV for %s@%s:\n\n" "$resolved_name" "$resolved_version"
+    printf "%s\n\n" "$osv_response"
+    exit 1
+  fi
 fi
 
 # --------------// Package installation \\----------------
 
-confirm "Proceed with installation of '$dependency_package'?"
+confirm "Proceed with installation of '$resolved_name@$resolved_version'?"
 
 printf "Allow lifecycle scripts (preinstall/install/postinstall/prepare) to run? [y/N] "
 read -r allow_scripts
@@ -92,9 +98,9 @@ else
   exit 1
 fi
 
-printf "📦 Installing %s@%s…\n\n" "$dependency_package" "$resolved_version"
-pnpm add $scripts_flag $dep_flag "${dependency_package}@${resolved_version}"
-printf "✅ Installed %s@%s\n\n" "$dependency_package" "$resolved_version"
+printf "📦 Installing %s@%s…\n\n" "$resolved_name" "$resolved_version"
+pnpm add $scripts_flag $dep_flag "${resolved_name}@${resolved_version}"
+printf "✅ Installed %s@%s\n\n" "$resolved_name" "$resolved_version"
 
 printf "🔍 Running pnpm audit…\n\n"
 pnpm audit || printf "⚠️  Audit reported issues. Please review above.\n"
