@@ -43,6 +43,8 @@
     "coverage",
     "util-scripts",
     ".vscode",
-    "*.config.cjs"
+    "*.config.cjs",
+    "gitleaks.toml",
+    "lefthook.yml"
   ]
 }
