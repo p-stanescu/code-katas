@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     // Controls the module system used in compiled JavaScript output (follows the latest stable Node.js standards)
-    "module": "nodenext",
+    "module": "esnext",
 
     // Determines import statement resolution to actual files (latest stable Node.js features)
-    "moduleResolution": "nodenext",
+    "moduleResolution": "bundler",
 
     // Interop - must be used to import and compile CommonJS imports (most npm packages)
     "esModuleInterop": true,

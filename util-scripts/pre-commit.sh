@@ -58,7 +58,7 @@ printf "✅ Format check passed!\n\n"
 
 printf "🔎 Running tests..."
 
-pnpm test || exit_code=$?
+pnpm test:ci:coverage || exit_code=$?
 if [ "$exit_code" ]; then
   printf "\n❌ Tests failed.\n"
   exit 1
