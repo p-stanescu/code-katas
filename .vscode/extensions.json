@@ -17,6 +17,7 @@
     "esbenp.prettier-vscode",
     "wallabyjs.quokka-vscode",
     "nicoespeon.abracadabra",
-    "yoavbls.pretty-ts-errors"
+    "yoavbls.pretty-ts-errors",
+    "vitest.explorer"
   ]
 }

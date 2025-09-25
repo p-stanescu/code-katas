@@ -12,3 +12,6 @@ coverage/
 
 # Environment variables
 .env.local
+
+# stryker temp files
+.stryker-tmp
