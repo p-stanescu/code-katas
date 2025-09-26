@@ -1,4 +1,4 @@
-title = "Code Katas repo secret scanning rules"
+title = "Secret scanning rules"
 
 [extend]
 useDefault = true

@@ -1,6 +1,6 @@
-# Code katas repo
+# Programming exercises repo
 
-A repo to write solutions for the code katas from Code Wars
+A repo for programming exercises and solutions
 
 ## Typescript config to generate Javascript files
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { log, type logType } from '../katas/index.ts';
+import { log, type logType } from '../src/index.ts';
 
 describe('log', () => {
   it('returns "unset" when input is undefined', () => {
