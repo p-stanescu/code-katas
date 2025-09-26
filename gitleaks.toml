@@ -6,8 +6,6 @@ useDefault = true
 [[allowlists]]
 description = "Files to exclude from the scan"
 paths = [
-  '''(?i)(^|/)\.env\.example$''',
-  '''(?i)(^|/)[^/]+\.env\.example$''',
   '''(^|/)node_modules(/|$)''',
   '''(^|/)pnpm-lock\.yaml$''',
   '''(^|/)dist(/|$)''',
