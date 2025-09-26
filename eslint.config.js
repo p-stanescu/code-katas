@@ -19,7 +19,7 @@ export default [
   // Recommended TypeScript rules (ref: https://typescript-eslint.io/getting-started/)
   ...tseslint.configs.recommended,
 
-  // Optional stricter overrides and rules
+  // Optional stricter rules
   {
     files: ['**/*.ts', '**/*.tsx'],
     plugins: {
