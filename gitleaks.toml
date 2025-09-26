@@ -14,6 +14,6 @@ paths = [
 
 [[rules]]
 id = "generic-secret-keywords"
-description = "Detect common secret-related keywords"
+description = "Detect common secret-related keywords using matching patterns"
 regex = '''(?i)(password|passwd|pwd|secret|token|api[_-]?key|apikey|auth|credential|private[_-]?key|ssh[_-]?key|encryption[_-]?key)'''
 secretGroup = 0
