@@ -30,11 +30,11 @@
     "exactOptionalPropertyTypes": true,
     "useUnknownInCatchVariables": true,
 
-    // Module syntax safety
+    // Module syntax safety rules
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
 
-    // Import safety
+    // Import safety rules
     "noUncheckedSideEffectImports": true
   },
   "exclude": [
