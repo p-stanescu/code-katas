@@ -34,13 +34,10 @@
     "noUncheckedSideEffectImports": true
   },
   "exclude": [
-    "node_modules",
-    "dist",
-    "coverage",
-    "util-scripts",
     ".vscode",
-    "*.config.cjs",
-    "gitleaks.toml",
-    "lefthook.yml"
+    "node_modules/**",
+    "dist/**",
+    "coverage/**",
+    "*.config.cjs"
   ]
 }

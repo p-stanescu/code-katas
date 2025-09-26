@@ -4,16 +4,7 @@ import tseslint from 'typescript-eslint';
 
 export default [
   {
-    ignores: [
-      'node_modules',
-      'dist',
-      'coverage',
-      'jest.config.ts',
-      '*.config.cjs',
-      'util-scripts/**',
-      '.vscode',
-      '.env.local',
-    ],
+    ignores: ['node_modules/**', 'dist/**', 'coverage/**'],
   },
 
   // Recommended TypeScript rules (ref: https://typescript-eslint.io/getting-started/)
