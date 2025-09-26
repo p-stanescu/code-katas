@@ -7,6 +7,7 @@ export default defineConfig({
     include: ['tests/**/*.test.ts'],
     coverage: {
       provider: 'v8',
+      include: ['katas/**/*.ts'],
       thresholds: {
         lines: 80,
         functions: 80,
