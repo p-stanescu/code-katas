@@ -18,6 +18,7 @@
     "wallabyjs.quokka-vscode",
     "nicoespeon.abracadabra",
     "yoavbls.pretty-ts-errors",
-    "vitest.explorer"
+    "vitest.explorer",
+    "chakrounanas.turbo-console-log"
   ]
 }
